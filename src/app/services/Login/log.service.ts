@@ -25,7 +25,6 @@ export class LoginService {
   }
 
   constructor(private http: HttpClient) { }
-
   login(login:login): Observable<boolean> {
     return this.http.post<{ token: string }>(this.logg,login)
       .pipe(
