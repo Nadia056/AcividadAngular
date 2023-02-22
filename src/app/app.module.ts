@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonasComponent } from './components/personas/personas.component';
@@ -16,6 +16,10 @@ import { EliminarpersonaComponent } from './components/eliminarpersona/eliminarp
 import { EliminarbikerComponent } from './components/eliminarbiker/eliminarbiker.component';
 import { EliminarcarComponent } from './components/eliminarcar/eliminarcar.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { PersonaService } from './services/Personas/persona.service';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -36,9 +40,11 @@ import { MenuComponent } from './components/menu/menu.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PersonaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

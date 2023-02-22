@@ -4,28 +4,25 @@
 
 <div class="testbox">
   <h1>Registrate</h1>
-  <form action="/">
+  <form (ngSubmit)="abrirC()" #form="ngForm">
     <hr>
     <label id="icon" for="name"><i class="icon-envelope "></i></label>
-    <input type="text" name="name" id="name" placeholder="Email" required />
+    <input type="text" name="email" id="email" placeholder="Email" required [(ngModel)]="email" />
 
     <label id="icon" for="name"><i class="icon-user"></i></label>
-    <input type="text" name="name" id="name" placeholder="Nombre" required />
-    
-    <label id="icon" for="name"><i class="icon-user"></i></label>
-    <input type="text" name="name" id="name" placeholder="Apellido" required />
+    <input type="text" name="name" id="name" placeholder="Nombre" required [(ngModel)]="name" />
 
     <label  id="icon" for="name"><i class="icon-phone "></i></label>
-    <input type="text" id="phone" name="phone" maxlength="10" placeholder="Numero de telefono" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+    <input type="text" id="phone" name="phone" maxlength="10" [(ngModel)]="phone" placeholder="Numero de telefono" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 
     <label id="icon" for="name"><i class="icon-shield"></i></label>
-    <input type="password" name="name" id="name" placeholder="Password" required />
+    <input type="password" name="password" id="password" [(ngModel)]="password" placeholder="Password" required />
 
     <label id="icon" for="name"><i class="icon-shield"></i></label>
-    <input type="password" name="name" id="name" placeholder="Password-confirmation" required />
+    <input type="password" name="Password-confirmation" [(ngModel)]="password_confirmation" id="Password-confirmation" placeholder="Password-confirmation" required />
     <hr>
     <p>Al hacer clic en Registrarse, acepta nuestros<a href="#"> terminos y condiciones</a>.</p>
-    <a type="button" class="button" (click)="abrirC()">Registrarme</a>
+    <button type="submit" class="button">Registrarme</button>
   </form>
 </div>
 
@@ -41,7 +38,7 @@
       <div class="form-outline mb-4">
         <label class="form-label" for="name">Por favor ingresa el codigo que ha sido enviado a tu correo
           electronico</label>
-        <input type="text" id="name" class="form-control" />
+        <input type="text" id="name" class="form-control" [(ngModel)]="activation_code" />
       </div>
     </form>
   </div>

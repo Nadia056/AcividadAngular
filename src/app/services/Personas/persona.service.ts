@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, retry, Subject, tap, throwError } from 'rxjs';
 import { PersonaM } from 'src/app/Models/persona.model';
-import { environment } from 'src/environments/enviroment.development';
+import { environment } from 'src/environments/viroment';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+
+
+@Injectable({ providedIn: 'root' })
+
+
 export class PersonaService {
   urlapi = environment.URL_API;
   private _refresh$ = new Subject<void>();
-  private obtenerpersonas = this.urlapi + "/"
-  private crearPersona = this.urlapi + "/"
-  private obtenerpersona = this.urlapi + "/"
-  private modificarPersona = this.urlapi + "/"
-  private eliminarPersona = this.urlapi + "/"
+  private obtenerpersonas = this.urlapi + "/clients"
+  private activarPersona = this.urlapi + "/active/{id}"
+  private crearPersona = this.urlapi + "/clients"
+  private obtenerpersona = this.urlapi + "/clients/{id}"
+  private modificarPersona = this.urlapi + "/clients/{id}"
+  private eliminarPersona = this.urlapi + "/clients/{id}"
+
 
 
   private handleError(error: HttpErrorResponse) {
@@ -37,6 +42,13 @@ export class PersonaService {
 
   addPersona(persona: PersonaM): Observable<PersonaM> {
     return this.http.post<PersonaM>(this.crearPersona, persona)
+      .pipe(catchError(this.handleError))
+      .pipe(tap(() => {
+        this._refresh$.next();
+      }));
+  }
+  activePersona(id: number): Observable<PersonaM> {
+    return this.http.post<PersonaM>(this.activarPersona + id, id)
       .pipe(catchError(this.handleError))
       .pipe(tap(() => {
         this._refresh$.next();

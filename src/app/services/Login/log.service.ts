@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, retry, Subject, tap, throwError } from 'rxjs';
-import { environment } from 'src/environments/enviroment.development';
+import { environment } from 'src/environments/viroment';
+import { login } from 'src/app/Models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   urlapi = environment.URL_API;
-
+  private _refresh$ = new Subject<void>();
+  private obtenerpersonas = this.urlapi + "/clients"
+  private logg = this.urlapi + "/login"
+  private obtenerpersona = this.urlapi + "/clients/{id}"
+  private modificarPersona = this.urlapi + "/clients/{id}"
+  private eliminarPersona = this.urlapi + "/clients/{id}"
   private handleError(error: HttpErrorResponse) {
     if (error.status === 400) {
       console.error('An error occurred:', error.error);
@@ -20,8 +26,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(this.urlapi, { email, password })
+  login(login:login): Observable<boolean> {
+    return this.http.post<{ token: string }>(this.logg,login)
       .pipe(
         tap(res => {
           if (res.token) {

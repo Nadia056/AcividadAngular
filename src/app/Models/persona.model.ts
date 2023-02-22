@@ -1,11 +1,11 @@
 export interface PersonaM
 {
-    id: number;
+    id?: number;
     name: string;
     email: string;
     phone: string;
     password: string;
     role: string;
-    active: string;
+    active: boolean;
     activation_code: string;
 }
